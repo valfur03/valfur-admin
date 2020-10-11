@@ -40,7 +40,7 @@ router.post("/", verify_token(1), async (req, res) => {
 			from: '"' + process.env.APP_NAME + ' - Password service" <' + process.env.EMAIL_USER + '>',
 			to: user.email,
 			subject: "Get your new password!",
-			html: "<h1>" + process.env.APP_NAME + "</h1><p>Get your new password <a href='" + process.env.BASE_URL + "/new_password.html?token=" + token + "'>here</a>!</p><p>token: " + token + "</p>",
+			html: "<h1>" + process.env.APP_NAME + "</h1><p>Get your new password <a href='" + process.env.BASE_URL + "/auth/new_password.html?token=" + token + "'>here</a>!</p><p>token: " + token + "</p>",
 		});
 	} catch (error) {
 		return (res.status(500).send({message: "Error when sending the email"}));
