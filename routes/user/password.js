@@ -4,6 +4,7 @@ const { forgot_pass_validation, new_pass_validation } = require("./validation/pa
 const { get_user_by_email } = require("./query/get_user");
 const transporter = require("../../modules/email_connect");
 const update_password = require("./query/update_password");
+const email_template = require("../../email_template");
 
 router.post("/forgot", async (req, res) => {
 	//	Check the body
@@ -21,12 +22,7 @@ router.post("/forgot", async (req, res) => {
 	const token = jwt.sign({session_id: dbUser.session_id, email: email}, process.env.TOKEN_SECRET, {expiresIn: "1d"});
 	//	Send the token by email
 	try {
-		transporter.sendMail({
-			from: '"' + process.env.APP_NAME + ' - Password service" <' + process.env.EMAIL_USER + '>',
-			to: dbUser.email,
-			subject: "Get your new password!",
-			html: "<h1>" + process.env.APP_NAME + "</h1><p>Get your new password <a href='" + process.env.BASE_URL + "/auth/new_password.html?token=" + token + "'>here</a>!</p><p>token: " + token + "</p>",
-		});
+		transporter.sendMail(email_template(email, token));
 	} catch (error) {
 		return (res.status(500).send({message: "Error when sending the email"}));
 	}

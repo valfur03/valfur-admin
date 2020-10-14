@@ -7,6 +7,7 @@ const { cred_already_exists, get_user_by_username } = require("./query/get_user"
 const { add_user, update_username, delete_user } = require("./query/manage");
 const transporter = require("../../modules/email_connect");
 const get_user = require("./query/get_user");
+const email_template = require("../../email_template");
 
 router.post("/", verify_token(1), async (req, res) => {
 	//	Check the body
@@ -36,12 +37,7 @@ router.post("/", verify_token(1), async (req, res) => {
 	//	Send the mail to set the password
 	const token = jwt.sign({session_id: user.session_id, email: user.email}, process.env.TOKEN_SECRET, {expiresIn: "1d"});
 	try {
-		transporter.sendMail({
-			from: '"' + process.env.APP_NAME + ' - Password service" <' + process.env.EMAIL_USER + '>',
-			to: user.email,
-			subject: "Get your new password!",
-			html: "<h1>" + process.env.APP_NAME + "</h1><p>Get your new password <a href='" + process.env.BASE_URL + "/auth/new_password.html?token=" + token + "'>here</a>!</p><p>token: " + token + "</p>",
-		});
+		transporter.sendMail(email_template(email, token));
 	} catch (error) {
 		return (res.status(500).send({message: "Error when sending the email"}));
 	}
