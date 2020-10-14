@@ -9,12 +9,10 @@ dotenv.config();
 app.use(cors());
 
 const apiRoute = require("./routes");
-const initRoute = require("./init_db");
 const warmupRoute = require("./warmup");
 
 app.use(express.json());
 app.use("/api", apiRoute);
-app.use("/init", initRoute);
 app.use("/warmup", warmupRoute);
 
 app.listen(3000, () => console.log("Server running"));

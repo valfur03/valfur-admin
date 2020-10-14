@@ -1,0 +1,74 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+
+CREATE TABLE `link` (
+  `id` int(11) NOT NULL,
+  `text` text NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `project` (
+  `id` int(11) NOT NULL,
+  `title` varchar(40) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `session_id` varchar(60) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `user` (`id`, `session_id`, `username`, `email`, `password`, `level`) VALUES
+(1, '24s2djz0kg9d2i1h', 'valfur03', 'valentin.furmanek@gmail.com', '$2b$10$yqXno15DGjnA2WXt8f6yz.VR.Uz5quABSJezttCDrXSRKZZkiyjCe', 0);
+
+CREATE TABLE `work` (
+  `id` int(11) NOT NULL,
+  `title` varchar(40) NOT NULL,
+  `description` varchar(80) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `link`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `session_id` (`session_id`);
+
+ALTER TABLE `work`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `link`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `project`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `work`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
