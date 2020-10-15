@@ -1,4 +1,4 @@
-const router = require("./manage");
+const router = require("express").Router();
 const { get_links, get_link_by_id } = require("./query/get_link");
 
 router.get("/all", async (req, res) => {

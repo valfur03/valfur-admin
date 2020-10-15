@@ -1,4 +1,4 @@
-const router = require("./manage");
+const router = require("express").Router();
 const { get_works, get_work_by_id } = require("./query/get_work");
 
 router.get("/all", async (req, res) => {
