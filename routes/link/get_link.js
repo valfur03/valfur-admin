@@ -8,7 +8,7 @@ router.get("/all", async (req, res) => {
 		if (links.length == 0) return (res.status(404).send({message: "No link found"}));
 		return (res.send(links));
 	} catch (error) {
-		return (res.status(error.code).send(error.message));
+		return (res.status(error.code).send({message: error.message}));
 	}
 });
 
@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
 		if (link.length == 0) return (res.status(404).send({message: "Link not found"}));
 		return (res.send(link));
 	} catch (error) {
-		return (res.status(error.code).send(error.message));
+		return (res.status(error.code).send({message: error.message}));
 	}
 });
 

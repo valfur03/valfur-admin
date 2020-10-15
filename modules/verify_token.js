@@ -18,7 +18,7 @@ module.exports = function verifyToken(level) {
 			req.user = await get_user_by_session_id(verified.session_id);
 			if (!req.user) return (res.status(400).send({message: "Incorrect session id"}));
 		} catch (error) {
-			return (res.status(error.code).send(error.message));
+			return (res.status(error.code).send({message: error.message}));
 		}
 		//	Check the user level
 		if (level !== undefined) {
