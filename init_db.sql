@@ -14,6 +14,14 @@ CREATE TABLE `link` (
   `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `title` varchar(40) NOT NULL,
+  `text` text NOT NULL,
+  `type` varchar(5) NOT NULL,
+  `date_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
@@ -31,9 +39,6 @@ CREATE TABLE `user` (
   `level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `user` (`id`, `session_id`, `username`, `email`, `password`, `level`) VALUES
-(1, '24s2djz0kg9d2i1h', 'valfur03', 'valentin.furmanek@gmail.com', '$2b$10$yqXno15DGjnA2WXt8f6yz.VR.Uz5quABSJezttCDrXSRKZZkiyjCe', 0);
-
 CREATE TABLE `work` (
   `id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
@@ -43,6 +48,9 @@ CREATE TABLE `work` (
 
 
 ALTER TABLE `link`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `log`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `project`
@@ -59,11 +67,14 @@ ALTER TABLE `work`
 ALTER TABLE `link`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `project`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `work`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
