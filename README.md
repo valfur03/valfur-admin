@@ -31,7 +31,7 @@ npm install
 
 ###	Configuration
 
-There are two files that you need to configure yourself in order to run the API: `.env` and `email_template.js`.
+There are two files that you need to configure yourself in order to run the API: `.env` and `email_template.js`. When you first clone them, they have a `.template` suffix. Just remove it, and edit the files. They will be ignored by Git. 
 
 #### .env
 
