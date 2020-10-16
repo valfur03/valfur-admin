@@ -24,7 +24,7 @@ function add_log(title, text, type, datetime) {
 module.exports = async (title, text, type) => {
 	// Get the current datetime
 	const utc_date = new Date();
-	const datetime = eu(utc_date, "%G-%m-%d %H:%M:%S", "fr_FR", "Europe/Paris");
+	const datetime = eu(utc_date, "%G-%m-%d %H:%M:%S", "fr_FR", process.env.TIME_ZONE);
 	console.log(datetime);
 	// Check the body
 	const { error } = log_validation({title: title, text: text, type: type});

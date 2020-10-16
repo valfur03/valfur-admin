@@ -47,6 +47,7 @@ This file is used by the `dotenv` node module. You can complete the file with th
 | DB_PASSWORD         |         The password corresponding to the `DB_USER`.         |
 | DB_NAME             |                  The name of the database.                   |
 | TOKEN_SECRET        | The hash for encrypting tokens. You can generate one [here](https://randomkeygen.com/). |
+| TIME_ZONE           | The time zone for log dates ([here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) are all the time zone that you can use, ex: `Europe/Paris`). |
 | EMAIL_USER          |                   The SMTP server's user.                    |
 | EMAIL_PASS          |       The password corresponding to the `EMAIL_USER`.        |
 | EMAIL_HOST          |                 The SMTP server's hostname.                  |
