@@ -1,5 +1,7 @@
 const connection = require("./db_connect");
 const Joi = require("joi");
+const tz = require("timezone");
+var eu = tz(require("timezone/Europe"))
 
 function log_validation(data) {
 	const schema = Joi.object({
@@ -21,7 +23,9 @@ function add_log(title, text, type, datetime) {
 
 module.exports = async (title, text, type) => {
 	// Get the current datetime
-	const datetime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
+	const utc_date = new Date();
+	const datetime = eu(utc_date, "%G-%m-%d %H:%M:%S", "fr_FR", "Europe/Paris");
+	console.log(datetime);
 	// Check the body
 	const { error } = log_validation({title: title, text: text, type: type});
 	if (error) return ({code: 400, message: error.details[0].message});

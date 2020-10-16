@@ -18,6 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.13",
+    "timezone": "^1.0.23",
     "uniqid": "^5.2.0"
   }
 }
