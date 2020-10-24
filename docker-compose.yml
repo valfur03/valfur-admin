@@ -7,28 +7,30 @@ services:
   restart: always
   volumes:
    - db_data:/val/lib/mysql
-   - ./init_db.sql:/data/app/init_db.sql
   environment:
    MYSQL_ROOT_PASSWORD: root_password
    MYSQL_USER: mysql_user
    MYSQL_PASSWORD: mysql_password
+   MYSQL_DATABASE: vfadm
+  container_name: vfadm-mysql_server
  
  node:
   depends_on:
    - db
-  links:
-   - "db:localhost"
   build: .
   restart: always
   ports:
    - 3000:3000
+  environment:
+   DB_HOST: db
+  container_name: vfadm-node_server
 
  adminer:
   image: adminer
   restart: always
   ports:
    - 8080:8080
+  container_name: vfadm-adminer
 
 volumes:
  db_data: {}
- init_db.sql: {}

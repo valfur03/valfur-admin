@@ -79,7 +79,9 @@ Basically, this is the mail that will be send to the user when it is created, or
 
 ### The database
 
-This API uses a MySQL database. On your local machine, you can install XAMPP to host your own one.
+> If you are using Docker, you may ignore this part.
+
+This API uses a MySQL database. On your local machine, you can install a LAMP server to host your own one.
 
 First, you need to create a database named with the value of `DB_NAME`. In PhpMyAdmin, you can now import the `init_db.sql` file or copy and execute the commands one by one.
 
@@ -90,6 +92,8 @@ node init_db.js
 ```
 
 ## Usage
+
+The API listen to port **3000** (http://localhost:3000).
 
 Execute the `index.js` script.
 
@@ -102,6 +106,34 @@ The API is now usable.
 ### API documentation
 
 You can find the API documentation [here](https://documenter.getpostman.com/view/11748374/TVRoZ6jR).
+
+### Docker
+
+You can use Docker to setup the API.
+
+Launch the API with Docker.
+
+```shell
+docker-compose up -d
+```
+
+> The following commands can fail when starting the server. Just wait a few seconds.
+
+Then, initialize the database.
+
+```shell
+docker exec -i vfadm-mysql_server sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" vfadm' < init_db.sql
+```
+
+Finally, initialize the user table.
+
+```shell
+docker exec -i vfadm-node_server sh -c 'node init_db.js'
+```
+
+That's it, you can now use the API!
+
+If you need to, you can use Adminer to checkout your MySQL databases at http://localhost:8080.
 
 ## Issues
 
