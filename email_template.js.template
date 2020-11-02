@@ -1,8 +1,19 @@
-module.exports = function(email, token) {
+function password(email, token) {
 	return ({
 		from: ``,
 		to: ``,
 		subject: ``,
 		html: ``
 	});
-};
+}
+
+function tfa_code(email, secret) {
+	return ({
+		from: ``,
+		to: ``,
+		subject: ``,
+		html: ``
+	});
+}
+
+module.exports = { password, tfa_code };

@@ -7,7 +7,7 @@ const { cred_already_exists, get_user_by_username } = require("./query/get_user"
 const { add_user, update_username, delete_user } = require("./query/manage");
 const transporter = require("../../modules/email_connect");
 const get_user = require("./query/get_user");
-const email_template = require("../../email_template");
+const { password } = require("../../email_template");
 
 router.post("/", verify_token(1), async (req, res) => {
 	//	Check the body

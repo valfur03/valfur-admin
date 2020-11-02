@@ -4,7 +4,7 @@ function add_user_validation(data) {
 	const schema = Joi.object({
 		username: Joi.string().min(3).max(30).required(),
 		email: Joi.string().min(5).max(255).email().required(),
-		level: Joi.number().integer().min(0).max(3).required()
+		level: Joi.number().integer().min(0).max(4).required()
 	});
 	return (schema.validate(data));
 }
