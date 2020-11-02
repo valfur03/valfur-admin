@@ -20,7 +20,7 @@ router.post("/", verify_token(2), async (req, res) => {
 	return (res.send({message: "Cloner config added"}));
 });
 
-router.patch("/url", verify_token(2), async (req, res) => {
+router.put("/url", verify_token(2), async (req, res) => {
 	//	Check the body
 	const { error } = manage_cloner_validation(req.body);
 	if (error) return (res.status(400).send({message: error.details[0].message}));
