@@ -36,6 +36,14 @@ CREATE TABLE `project` (
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `setting` (
+  `name` varchar(255) NOT NULL,
+  `value` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `setting` (`name`, `value`) VALUES
+('log_cpu', 1);
+
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `session_id` varchar(60) NOT NULL,
@@ -64,6 +72,9 @@ ALTER TABLE `log`
 
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `setting`
+  ADD PRIMARY KEY (`name`);
 
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
