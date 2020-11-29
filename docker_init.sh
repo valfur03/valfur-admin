@@ -31,25 +31,16 @@ fi
 echo "${BLUE}Building docker images and composing...${NC}"
 if docker-compose build && docker-compose up -d
 then
-	echo "${BLUE}Waiting for container to start ...${NC}"
-	sleep 10
-	
 	echo "${BLUE}Initializing database...${NC}"
-	if docker exec -i vfadm-mysql_server sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" vfadm' < init_db.sql
-	then
-		if docker exec -i vfadm-node_server sh -c 'node init_db.js'
-		then
-			echo "${GREEN}Success!${NC}"
-		else
-			echo "${RED}Cannot create the first user.${NC}"
-			docker-compose down
-			exit 1
-		fi
-	else
-		echo "${RED}Cannot create databases.${NC}"
-		docker-compose down
-		exit 1
-	fi
+	until docker exec -i vfadm-mysql_server sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" vfadm' < init_db.sql 2> /dev/null
+	do
+		sleep 1
+	done
+	until docker exec -i vfadm-node_server sh -c 'node init_db.js' 2> /dev/null
+	do
+		sleep 1
+	done
+	echo "${GREEN}Success!${NC}"
 else
 	echo "${RED}docker-compose failed.${NC}"
 	docker-compose down
